@@ -52,6 +52,18 @@ export default function Settlement() {
     setModal({ ...modal, [target]: toggle });
   };
 
+  const [mousePosition, setMousePosition] = useState({ mouseX: null, mouseY: null });
+
+  const updateMousePosition = (ev) => {
+    setMousePosition({ mouseX: ev.clientX, mouseY: ev.clientY });
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", updateMousePosition);
+
+    return () => window.removeEventListener("mousemove", updateMousePosition);
+  }, []);
+
   //Page loading in with all data
   //Character Data
   let isPlace = character.place ? false : true;
@@ -132,12 +144,13 @@ export default function Settlement() {
           <button className="side-button" onClick={() => toggleModal("character")}>
             character
           </button>
-          {modal.character ? <Modal title="Character" component={<Character />} /> : ""}
+          {modal.character ? <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Character" component={<Character />} /> : ""}
           <button className="side-button" onClick={() => toggleModal("stats")}>
             stats
           </button>
           {modal.stats ? (
             <Modal
+              mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY}
               title={characterData.getCharacter.name}
               subtitle={
                 <div>
@@ -152,15 +165,15 @@ export default function Settlement() {
           <button className="side-button" onClick={() => toggleModal("equipment")}>
             equipment
           </button>
-          {modal.equipment ? <Modal title="Equipment" component={<Equipment equipmentId={characterData.getCharacter.equipment} />} /> : ""}
+          {modal.equipment ? <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Equipment" component={<Equipment equipmentId={characterData.getCharacter.equipment} />} /> : ""}
           <button className="side-button" onClick={() => toggleModal("inventory")}>
             inventory
           </button>
-          {modal.inventory ? <Modal title="Inventory" component={<Inventory inventoryId={characterData.getCharacter.inventory} />} /> : ""}
+          {modal.inventory ? <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Inventory" component={<Inventory inventoryId={characterData.getCharacter.inventory} />} /> : ""}
           <button className="side-button" onClick={() => toggleModal("dungeon")}>
             bidding
           </button>
-          {modal.dungeon ? <Modal title="Dungeon" component={<Dungeon />} /> : ""}
+          {modal.dungeon ? <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Dungeon" component={<Dungeon />} /> : ""}
         </Grid>
       </Grid>
     );

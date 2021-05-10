@@ -49,6 +49,18 @@ export default function Settlement() {
     setModal({ ...modal, [target]: toggle });
   };
 
+  const [mousePosition, setMousePosition] = useState({ mouseX: null, mouseY: null });
+
+  const updateMousePosition = (ev) => {
+    setMousePosition({ mouseX: ev.clientX, mouseY: ev.clientY });
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", updateMousePosition);
+
+    return () => window.removeEventListener("mousemove", updateMousePosition);
+  }, []);
+
   //Page loading in with all data
   //Character Data
   const { loading: characterLoad, data: characterData, refetch } = useQuery(FETCH_CHARACTER, { variables: { characterId }, pollInterval: 500 });
@@ -91,12 +103,14 @@ export default function Settlement() {
           <button className="side-button" onClick={() => toggleModal("character")}>
             character
           </button>
-          {modal.character ? <Modal title="Character" component={<Character />} /> : ""}
+          {modal.character ? <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Character" component={<Character />} /> : ""}
           <button className="side-button" onClick={() => toggleModal("stats")}>
             stats
           </button>
           {modal.stats ? (
             <Modal
+              mouseX={mousePosition.mouseX}
+              mouseY={mousePosition.mouseY}
               title={characterData.getCharacter.name}
               subtitle={
                 <div>
@@ -111,23 +125,54 @@ export default function Settlement() {
           <button className="side-button" onClick={() => toggleModal("equipment")}>
             equipment
           </button>
-          {modal.equipment ? <Modal title="Equipment" component={<Equipment equipmentId={characterData.getCharacter.equipment} />} /> : ""}
+          {modal.equipment ? (
+            <Modal
+              mouseX={mousePosition.mouseX}
+              mouseY={mousePosition.mouseY}
+              title="Equipment"
+              component={<Equipment equipmentId={characterData.getCharacter.equipment} />}
+            />
+          ) : (
+            ""
+          )}
           <button className="side-button" onClick={() => toggleModal("inventory")}>
             inventory
           </button>
-          {modal.inventory ? <Modal title="Inventory" component={<Inventory inventoryId={characterData.getCharacter.inventory} />} /> : ""}
+          {modal.inventory ? (
+            <Modal
+              mouseX={mousePosition.mouseX}
+              mouseY={mousePosition.mouseY}
+              title="Inventory"
+              component={<Inventory inventoryId={characterData.getCharacter.inventory} />}
+            />
+          ) : (
+            ""
+          )}
           <button className="side-button" onClick={() => toggleModal("vault")}>
             vault
           </button>
-          {modal.vault && !vaultLoad ? <Modal title="Vault" component={<Inventory inventoryId={vaultData.getUser.vault[0]} />} /> : ""}
+          {modal.vault && !vaultLoad ? (
+            <Modal
+              mouseX={mousePosition.mouseX}
+              mouseY={mousePosition.mouseY}
+              title="Vault"
+              component={<Inventory inventoryId={vaultData.getUser.vault[0]} />}
+            />
+          ) : (
+            ""
+          )}
           <button className="side-button" onClick={() => toggleModal("party")}>
             party
           </button>
-          {modal.party && character.place ? <Modal title="Party" component={<Party />} /> : ""}
+          {modal.party && character.place ? <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Party" component={<Party />} /> : ""}
           <button className="side-button" onClick={() => toggleModal("venture")}>
             venture
           </button>
-          {modal.venture && character.place ? <Modal title="Venture" component={<Venture />} /> : ""}
+          {modal.venture && character.place ? (
+            <Modal mouseX={mousePosition.mouseX} mouseY={mousePosition.mouseY} title="Venture" component={<Venture />} />
+          ) : (
+            ""
+          )}
         </Grid>
       </Grid>
     );
@@ -135,7 +180,7 @@ export default function Settlement() {
 }
 
 const FETCH_CHARACTER = gql`
-  query($characterId: ID!) {
+  query ($characterId: ID!) {
     getCharacter(characterId: $characterId) {
       owner
       name
@@ -331,7 +376,7 @@ const FETCH_CHARACTER = gql`
 `;
 
 const FETCH_VAULTS = gql`
-  query($userId: ID!) {
+  query ($userId: ID!) {
     getUser(userId: $userId) {
       vault
     }
@@ -339,7 +384,7 @@ const FETCH_VAULTS = gql`
 `;
 
 const FETCH_EQUIPS = gql`
-  query($equipmentId: ID!) {
+  query ($equipmentId: ID!) {
     getEquips(equipmentId: $equipmentId) {
       head {
         name
