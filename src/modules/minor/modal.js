@@ -4,6 +4,12 @@ import ModalHeader from "./modalheader";
 
 import "../styles/base.css";
 
+var mouseX, mouseY;
+$(document).mousemove(function(e) {
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+}).mouseover();
+
 export default function Modal({ title, component, subtitle }) {
   const modalRef = useRef(null);
 
@@ -12,15 +18,8 @@ export default function Modal({ title, component, subtitle }) {
     if (!modal) return;
 
     const { x, y } = modal.getBoundingClientRect();
-    let widthMultiplier = modalRef.current.clientWidth/1000;
-    let heightMultiplier = modalRef.current.clientHeight/1000;
-
-    console.log(`MovementX: ${movementX}`);
-    console.log(`MovementY: ${movementY}`);
-
-    modal.style.left = `${x + movementX*heightMultiplier}px`;
-    modal.style.top = `${y + movementY*widthMultiplier}px`;
-
+    modal.style.left = `${mouseX - x}px`;
+    modal.style.top = `${mouseY - y}px`;
   };
 
   return (
