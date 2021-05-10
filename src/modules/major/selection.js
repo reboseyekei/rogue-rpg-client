@@ -96,7 +96,7 @@ export default function Selection() {
                 }}
               >
                 <img
-                  src={require(`../../assets/skins/${character.skins[0]}.jpg`)}
+                  src={require(`../../assets/skins/${character.skins[0]}.jpg`).default}
                   style={{ width: "300px", height: "300px" }}
                   alt={`character graphic for ${character.skins[0]}`}
                 />

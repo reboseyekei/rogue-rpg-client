@@ -58,7 +58,7 @@ function PartyDetails({ partyId, kickable, kick, leave }) {
               <Grid container style={{ borderRadius: "5px" }}>
                 <Grid item xs={6}>
                   <img
-                    src={require(`../../assets/skins/${character.skins[0]}.jpg`)}
+                    src={require(`../../assets/skins/${character.skins[0]}.jpg`).default}
                     style={{ width: "100%", borderRadius: "5px" }}
                     alt={`character graphic for ${character.skins[0]}`}
                   />

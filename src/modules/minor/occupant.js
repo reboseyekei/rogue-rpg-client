@@ -73,7 +73,7 @@ export default function Occupant({ occupant, turn}) {
         )}
       </div>
       <img
-        src={require(`../../assets/skins/${occupant.skin}.jpg`)}
+        src={require(`../../assets/skins/${occupant.skin}.jpg`).default}
         style={{ height: "350px", borderRadius: "5px" }}
         alt={`character graphic for ${occupant.name}`}
       />

@@ -67,7 +67,7 @@ export default function Players({ players, turn}) {
         <div style={{ borderRadius: "5px", border: player.id === turn[0][0] ? "2px solid #918959" : "2px solid #111", padding: "10px", height: "100%" }}>
           <h1 className="subheader">{player.name}</h1>
           <img
-            src={require(`../../assets/skins/${player.skin}.jpg`)}
+            src={require(`../../assets/skins/${player.skin}.jpg`).default}
             style={{ width: "80%", borderRadius: "5px" }}
             alt={`character graphic for ${player.name}`}
           />

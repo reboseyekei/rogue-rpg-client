@@ -205,7 +205,7 @@ function Venture() {
               <Grid container style={{ borderRadius: "5px" }}>
                 <Grid item xs={5}>
                   <img
-                    src={require(`../../assets/icons/${area.icon}.jpg`)}
+                    src={require(`../../assets/icons/${area.icon}.jpg`).default}
                     style={{ width: "238px", height: "238px", borderRadius: "5px" }}
                     alt={`dungeon graphic for ${area.name}`}
                   />

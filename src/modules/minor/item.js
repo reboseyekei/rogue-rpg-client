@@ -132,10 +132,10 @@ function Item({ itemId, enchantments, status, type, slot, setSlot }) {
           <object
             className="item"
             style={{ height: "48px", width: "48px", cursor: "grab" }}
-            data={require(`../../assets/items/${fetchedItem.path}.svg`)}
+            data={require(`../../assets/items/${fetchedItem.path}.svg`).default}
             type="image/svg+xml"
           >
-            <img src={require(`../../assets/items/${fetchedItem.path}.svg`)} alt={fetchedItem.name} />
+            <img src={require(`../../assets/items/${fetchedItem.path}.svg`).default} alt={fetchedItem.name} />
           </object>
         </div>
       );
@@ -190,6 +190,7 @@ function Item({ itemId, enchantments, status, type, slot, setSlot }) {
       );
     }
   }
+  return null;
 }
 
 export default memo(Item);

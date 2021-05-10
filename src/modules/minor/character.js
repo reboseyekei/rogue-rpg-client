@@ -553,7 +553,7 @@ function Character() {
               <Grid item xs={12}>
                 {" "}
                 <img
-                  src={require(`../../assets/skins/${character.skins[0]}.jpg`)}
+                  src={require(`../../assets/skins/${character.skins[0]}.jpg`).default}
                   style={{ height: "200px", borderRadius: "5px", border: "2.5px solid #222" }}
                   alt={`character graphic for ${character.skins[0]}`}
                 />

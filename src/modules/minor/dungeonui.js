@@ -234,7 +234,7 @@ export default function DungeonUI({ dungeon, dungeonLoad }) {
                   <Grid container style={{ borderRadius: "5px" }}>
                     <Grid item xs={6}>
                       <img
-                        src={require(`../../assets/skins/${player.skin}.jpg`)}
+                        src={require(`../../assets/skins/${player.skin}.jpg`).default}
                         style={{ width: "100%", borderRadius: "5px" }}
                         alt={`character graphic for ${player.name}`}
                       />

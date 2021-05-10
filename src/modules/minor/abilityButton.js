@@ -43,10 +43,10 @@ function AbilityButton({ itemId, slot }) {
               <object
                 className="item"
                 style={{ height: "48px", width: "48px", cursor: "grab" }}
-                data={require(`../../assets/items/${abilityData.getAbility.tag}.svg`)}
+                data={require(`../../assets/items/${abilityData.getAbility.tag}.svg`).default}
                 type="image/svg+xml"
               >
-                <img src={require(`../../assets/items/${abilityData.getAbility.tag}.svg`)} alt={abilityData.getAbility.name} />
+                <img src={require(`../../assets/items/${abilityData.getAbility.tag}.svg`).default} alt={abilityData.getAbility.name} />
               </object>
             </Grid>
             <Grid item xs={7} md={9}>
@@ -59,6 +59,7 @@ function AbilityButton({ itemId, slot }) {
       </Grid>
     );
   }
+  return null;
 }
 
 export default memo(AbilityButton);
