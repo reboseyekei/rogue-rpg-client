@@ -12,8 +12,11 @@ export default function Modal({ title, component, subtitle }) {
     if (!modal) return;
 
     const { x, y } = modal.getBoundingClientRect();
-    let widthMultiplier = modalRef.current.clientWidth/1600 + 1.4;
-    let heightMultiplier = modalRef.current.clientHeight/1600 + 1.4;
+    let widthMultiplier = modalRef.current.clientWidth/1000;
+    let heightMultiplier = modalRef.current.clientHeight/1000;
+
+    console.log(`MovementX: ${movementX}`);
+    console.log(`MovementY: ${movementY}`);
 
     modal.style.left = `${x + movementX*heightMultiplier}px`;
     modal.style.top = `${y + movementY*widthMultiplier}px`;
